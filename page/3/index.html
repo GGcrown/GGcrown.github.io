@@ -144,83 +144,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-designPattern" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/designPattern/">设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/25/designPattern/" class="archive-article-date">
-  	<time datetime="2018-05-25T02:27:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h4><h5 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h5><ul>
-<li>首先将构造函数私有划 使得不能在外部调用构造函数</li>
-<li>创建自己的静态变量</li>
-<li>将对象初始化放在方法内，判断静态变量是否初始化，已经初始化直接返回，没有初始化先初始化再返回</li>
-<li>优点：节省性能，在没有调用的时候不用消耗内存</li>
-<li>缺点：线程不安全，因为静态变量可能在同时被多个线程访问，使得初始化的时候可能造成线程不安全（所以可以加线程锁来解决线程安全的问题）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleSchool</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleSchool singleSchool=<span class="keyword">null</span>;</span><br><span class="line">            </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleSchool</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">            singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 加上线程锁 使得线程更加安全，但是这是因为每次调用方法的时候会有因为线程锁的原因导致运行效率降低</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(SingleSchool.class)&#123;</span><br><span class="line">            <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">                singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 双重线程锁 这样就可以提高运行的效率，因为绝大部门线程不会进入线程锁里面，所以效率提高了</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole3</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(SingleSchool.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="饿汉式-1"><a href="#饿汉式-1" class="headerlink" title="饿汉式"></a>饿汉式</h5><ul>
-<li>首先将构造函数私有划 使得不能在外部调用构造函数</li>
-<li>创建自己的静态变量并且直接初始化</li>
-<li>将对象初始化放在方法内，返回静态变量</li>
-<li>优点：在加载的时候就已经初始化，天生线程安全</li>
-<li>缺点：也是因为加载的时候就已经初始化，所以比较消耗资源</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleSchool</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleSchool</span><span class="params">()</span></span>&#123;&#125;<span class="comment">// 私有化构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleSchool singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> singleSchool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/25/designPattern/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-SpringBoot" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -1626,6 +1549,106 @@ crontab -e
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/18/myeclipse/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-shiro" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/15/shiro/">shiro</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/15/shiro/" class="archive-article-date">
+  	<time datetime="2018-01-15T01:40:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>导入jar包<br>1.配置shiroFitler过滤器<br>     <!-- Shiro Filter is defined in the spring application context: --><br>    <filter><br>        <filter-name>shiroFilter</filter-name><br>        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class><br>        <init-param><br>            <param-name>targetFilterLifecycle</param-name><br>            <param-value>true</param-value><br>        </init-param><br>    </filter></p>
+<p>2.配置securityManager<br>    <!-- --><br>    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"><br>        <property name="cacheManager" ref="cacheManager"><br>        <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. --><br>        <property name="sessionMode" value="native"><br>        <property name="realm" ref="jdbcRealm"><br>    </property></property></property></bean></p>
+<p>3.配置SecurityManager  缓存配置<br>3.1 需要加入ehache的jar以及配置文件<br>    <!-- Let's use some enterprise caching support for better performance.
+        You can replace this with any enterprise
+        caching framework implementation that you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc --><br>    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"><br>        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have one.  If not, a new one
+             will be creaed with a default config:
+             <property name="cacheManager" ref="ehCacheManager"/> --><br>        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance to inject, but you want
+             a specific Ehcache configuration to be used, specify that here.  If you don't, a default
+             will be used.:--><br>        <property name="cacheManagerConfigFile" value="classpath:some/path/to/ehcache.xml"><br>    </property></bean></p>
+<ol start="4">
+<li><p>配置LifecycleBeanPostProcessor. 可以自定的来调用配置Spring IOC 容器中shiro </p>
+ <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor">
+</bean></li>
+<li><p>启用 IOC容器中使用shiro的注解。但必须在配置了lifecycleBeanPostProcessor之后才可以使用</p>
+ <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"><br> <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"><br>     <property name="securityManager" ref="securityManager"><br> </property></bean>
+</bean></li>
+<li><p>配置ShiroFilter<br>6.1 id必须和web.xml 文件中配置的DelegatingFilterProxy的<filter-name>一致</filter-name></p>
+ <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"><br>     <property name="securityManager" ref="securityManager"><br>     <property name="loginUrl" value="/login.jsp"><br>     <property name="successUrl" value="/list.jsp"><br>     <property name="unauthorizedUrl" value="/unauthorized.jsp"><br>     <!--
+     配置哪些页面需要保护。
+     以及访问这些页面需要的权限。
+     1）anon 可以被匿名访问
+     2）authc 必须认证（即登录）才可以访问页面
+     --><br>     <property name="filterChainDefinitions"><br>         <value><br>             /login.jsp = anon<br><br>             # everything else requires authentication:<br>             /** = authc<br>         </value><br>     </property><br> </property></property></property></property></bean>
+
+
+</li>
+</ol>
+<hr>
+<ol>
+<li>获取当前的 Subject. 调用 SecurityUtils.getSubject();</li>
+<li>测试当前的用户是否已经被认证. 即是否已经登录. 调用 Subject 的 isAuthenticated() </li>
+<li>若没有被认证, 则把用户名和密码封装为 UsernamePasswordToken 对象<br> 1). 创建一个表单页面<br> 2). 把请求提交到 SpringMVC 的 Handler<br> 3). 获取用户名和密码. </li>
+<li>执行登录: 调用 Subject 的 login(AuthenticationToken) 方法. </li>
+<li>自定义 Realm 的方法, 从数据库中获取对应的记录, 返回给 Shiro.<br> 1). 实际上需要继承 org.apache.shiro.realm.AuthenticatingRealm 类<br> 2). 实现 doGetAuthenticationInfo(AuthenticationToken) 方法. </li>
+<li>由 shiro 完成对密码的比对. </li>
+</ol>
+<hr>
+<p>1.如何把一个字符串MD5加密<br>2.替换当前Realm的credentiallsMatcher属性，使用HashedCredentialsMatcher，并设置加密算法即可。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/15/shiro/">展开全文 >></a>
         </p>
       
 
