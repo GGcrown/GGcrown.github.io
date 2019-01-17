@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>hello world</title>
+  <title>planUML | hello world</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="hello world">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+  <meta name="description" content="时序图1.1简单示例-&amp;gt; 来绘制参与者之间传递的消息，而不必显式地声明参与者。 你也可以使用”--&amp;gt;” 绘制一个虚线箭头。 另外，你还能用”&amp;lt;-” 和”&amp;lt;--”，这不影响绘图，但可以提高可读性。注意：仅适用于时序图，对于其 它示意图，规则是不同的。 123456@startumlAlice -&amp;gt; Bob: Authentication RequestBob --&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="planUML">
+<meta property="og:url" content="http://yoursite.com/2019/01/16/planUML/index.html">
 <meta property="og:site_name" content="hello world">
+<meta property="og:description" content="时序图1.1简单示例-&amp;gt; 来绘制参与者之间传递的消息，而不必显式地声明参与者。 你也可以使用”--&amp;gt;” 绘制一个虚线箭头。 另外，你还能用”&amp;lt;-” 和”&amp;lt;--”，这不影响绘图，但可以提高可读性。注意：仅适用于时序图，对于其 它示意图，规则是不同的。 123456@startumlAlice -&amp;gt; Bob: Authentication RequestBob --&amp;gt">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-17T08:29:00.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello world">
+<meta name="twitter:title" content="planUML">
+<meta name="twitter:description" content="时序图1.1简单示例-&amp;gt; 来绘制参与者之间传递的消息，而不必显式地声明参与者。 你也可以使用”--&amp;gt;” 绘制一个虚线箭头。 另外，你还能用”&amp;lt;-” 和”&amp;lt;--”，这不影响绘图，但可以提高可读性。注意：仅适用于时序图，对于其 它示意图，规则是不同的。 123456@startumlAlice -&amp;gt; Bob: Authentication RequestBob --&amp;gt">
   
     <link rel="alternative" href="/atom.xml" title="hello world" type="application/atom+xml">
   
@@ -142,66 +146,120 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-shiro" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+            <article id="post-planUML" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/15/shiro/">shiro</a>
+    <h1 class="article-title" itemprop="name">
+      planUML
     </h1>
   
 
         
-        <a href="/2018/01/15/shiro/" class="archive-article-date">
-  	<time datetime="2018-01-15T01:40:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
+        <a href="/2019/01/16/planUML/" class="archive-article-date">
+  	<time datetime="2019-01-16T09:25:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>导入jar包<br>1.配置shiroFitler过滤器<br>     <!-- Shiro Filter is defined in the spring application context: --><br>    <filter><br>        <filter-name>shiroFilter</filter-name><br>        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class><br>        <init-param><br>            <param-name>targetFilterLifecycle</param-name><br>            <param-value>true</param-value><br>        </init-param><br>    </filter></p>
-<p>2.配置securityManager<br>    <!-- --><br>    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"><br>        <property name="cacheManager" ref="cacheManager"><br>        <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. --><br>        <property name="sessionMode" value="native"><br>        <property name="realm" ref="jdbcRealm"><br>    </property></property></property></bean></p>
-<p>3.配置SecurityManager  缓存配置<br>3.1 需要加入ehache的jar以及配置文件<br>    <!-- Let's use some enterprise caching support for better performance.
-        You can replace this with any enterprise
-        caching framework implementation that you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc --><br>    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"><br>        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have one.  If not, a new one
-             will be creaed with a default config:
-             <property name="cacheManager" ref="ehCacheManager"/> --><br>        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance to inject, but you want
-             a specific Ehcache configuration to be used, specify that here.  If you don't, a default
-             will be used.:--><br>        <property name="cacheManagerConfigFile" value="classpath:some/path/to/ehcache.xml"><br>    </property></bean></p>
-<ol start="4">
-<li><p>配置LifecycleBeanPostProcessor. 可以自定的来调用配置Spring IOC 容器中shiro </p>
- <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor">
-</bean></li>
-<li><p>启用 IOC容器中使用shiro的注解。但必须在配置了lifecycleBeanPostProcessor之后才可以使用</p>
- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"><br> <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"><br>     <property name="securityManager" ref="securityManager"><br> </property></bean>
-</bean></li>
-<li><p>配置ShiroFilter<br>6.1 id必须和web.xml 文件中配置的DelegatingFilterProxy的<filter-name>一致</filter-name></p>
- <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"><br>     <property name="securityManager" ref="securityManager"><br>     <property name="loginUrl" value="/login.jsp"><br>     <property name="successUrl" value="/list.jsp"><br>     <property name="unauthorizedUrl" value="/unauthorized.jsp"><br>     <!--
-     配置哪些页面需要保护。
-     以及访问这些页面需要的权限。
-     1）anon 可以被匿名访问
-     2）authc 必须认证（即登录）才可以访问页面
-     --><br>     <property name="filterChainDefinitions"><br>         <value><br>             /login.jsp = anon<br><br>             # everything else requires authentication:<br>             /** = authc<br>         </value><br>     </property><br> </property></property></property></property></bean>
-
-
-</li>
-</ol>
-<hr>
-<ol>
-<li>获取当前的 Subject. 调用 SecurityUtils.getSubject();</li>
-<li>测试当前的用户是否已经被认证. 即是否已经登录. 调用 Subject 的 isAuthenticated() </li>
-<li>若没有被认证, 则把用户名和密码封装为 UsernamePasswordToken 对象<br> 1). 创建一个表单页面<br> 2). 把请求提交到 SpringMVC 的 Handler<br> 3). 获取用户名和密码. </li>
-<li>执行登录: 调用 Subject 的 login(AuthenticationToken) 方法. </li>
-<li>自定义 Realm 的方法, 从数据库中获取对应的记录, 返回给 Shiro.<br> 1). 实际上需要继承 org.apache.shiro.realm.AuthenticatingRealm 类<br> 2). 实现 doGetAuthenticationInfo(AuthenticationToken) 方法. </li>
-<li>由 shiro 完成对密码的比对. </li>
-</ol>
-<hr>
-<p>1.如何把一个字符串MD5加密<br>2.替换当前Realm的credentiallsMatcher属性，使用HashedCredentialsMatcher，并设置加密算法即可。</p>
+        <h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><h4 id="1-1简单示例"><a href="#1-1简单示例" class="headerlink" title="1.1简单示例"></a>1.1简单示例</h4><pre><code>-&gt; 来绘制参与者之间传递的消息，而不必显式地声明参与者。
+你也可以使用”--&gt;” 绘制一个虚线箭头。
+另外，你还能用”&lt;-” 和”&lt;--”，这不影响绘图，但可以提高可读性。注意：仅适用于时序图，对于其
+它示意图，规则是不同的。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Alice -&gt; Bob: Authentication Request</span><br><span class="line">Bob --&gt; Alice: Authentication Response</span><br><span class="line">Alice -&gt; Bob: Another authentication Request</span><br><span class="line">Alice &lt;-- Bob: another authentication Response</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-声明参与者"><a href="#1-2-声明参与者" class="headerlink" title="1.2 声明参与者"></a>1.2 声明参与者</h4><pre><code>关键字 participant 用于改变参与者的先后顺序。
+你也可以使用其它关键字来声明参与者：
+• actor
+• boundary
+• control
+• entity
+• database
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">actor Foo1</span><br><span class="line">boundary Foo2</span><br><span class="line">control Foo3</span><br><span class="line">entity Foo4</span><br><span class="line">database Foo5</span><br><span class="line">collections Foo6</span><br><span class="line">Foo1 -&gt; Foo2 : To boundary</span><br><span class="line">Foo1 -&gt; Foo3 : To control</span><br><span class="line">Foo1 -&gt; Foo4 : To entity</span><br><span class="line">Foo1 -&gt; Foo5 : To database</span><br><span class="line">Foo1 -&gt; Foo6 : To collections</span><br><span class="line">@enduml</span><br><span class="line"></span><br><span class="line">#### 1.3 在参与者中使用非字母符号</span><br></pre></td></tr></table></figure>
+<pre><code>关键字 as 用于重命名参与者
+你可以使用 RGB 值或者颜色名修改 actor 或参与者的背景颜色。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">actor Bob #red</span><br><span class="line">&apos; The only difference between actor</span><br><span class="line">&apos;and participant is the drawing</span><br><span class="line">participant Alice</span><br><span class="line">participant L as &quot;I have a really\nlong name&quot; #99FF99</span><br><span class="line">/&apos; You can also declare:</span><br><span class="line">participant &quot;I have a really\nlong name&quot; as L #99FF99</span><br><span class="line">&apos;/</span><br><span class="line">Alice-&gt;Bob: Authentication Request</span><br><span class="line">Bob-&gt;Alice: Authentication Response</span><br><span class="line">Bob-&gt;L: Log transaction</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-4-给自己发消息"><a href="#1-4-给自己发消息" class="headerlink" title="1.4 给自己发消息"></a>1.4 给自己发消息</h4><p>参与者可以给自己发信息，<br>消息文字可以用 \n 来换行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">myself -&gt; myself: do like thing\nxixi</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-5修改箭头样式"><a href="#1-5修改箭头样式" class="headerlink" title="1.5修改箭头样式"></a>1.5修改箭头样式</h4><p>修改箭头样式的方式有以下几种:<br>• 表示一条丢失的消息：末尾加 x<br>• 让箭头只有上半部分或者下半部分：将 &lt; 和 &gt; 替换成 \ 或者 /<br>• 细箭头：将箭头标记写两次 (如 &gt;&gt; 或 //)<br>• 虚线箭头：用 – 替代 -<br>• 箭头末尾加圈：-&gt;o<br>• 双向箭头：<-><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">z3 -&gt;x l4</span><br><span class="line">z3 -/ l4</span><br><span class="line">z3 -&gt;&gt; l4</span><br><span class="line">z3 -&gt;o l4</span><br><span class="line">z3 &lt;-&gt; l4</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure></-></p>
+<h4 id="1-6-修改箭头颜色"><a href="#1-6-修改箭头颜色" class="headerlink" title="1.6 修改箭头颜色"></a>1.6 修改箭头颜色</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">z3 -[#red]&gt; l4: 小四啊</span><br><span class="line">z3 &lt;-[#0000ff]l4: 嘻嘻</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-7-对消息序列编号"><a href="#1-7-对消息序列编号" class="headerlink" title="1.7 对消息序列编号"></a>1.7 对消息序列编号</h4><pre><code>关键字 autonumber 用于自动对消息编号。
+语句 autonumber &apos;start&apos; 用于指定编号的初始值，而 autonumber &apos;start&apos; &apos;increment&apos; 可以同
+时指定编号的初始值和每次增加的值。
+你可以在双引号内指定编号的格式。
+格式是由 Java 的 DecimalFormat 类实现的：(’0’ 表示数字；’#’ 也表示数字，但默认为 0)。
+你也可以用 HTML 标签来制定格式。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">autonumber 1</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">autonumber 10</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">autonumber 20 5</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">autonumber &quot;&lt;b&gt;[000]&quot;</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">autonumber 20  &quot;&lt;b&gt;(&lt;u&gt;##&lt;/u&gt;)&quot;</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">autonumber 40 10 &quot;&lt;font color=red&gt;&lt;b&gt;Message 0 &quot;</span><br><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br></pre></td></tr></table></figure>
+<h4 id="1-8分割示意图"><a href="#1-8分割示意图" class="headerlink" title="1.8分割示意图"></a>1.8分割示意图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">z3-&gt;l4:xixi</span><br><span class="line">z3&lt;-l4:zhazha</span><br><span class="line"></span><br><span class="line">newpage</span><br><span class="line"></span><br><span class="line">z3-&gt;l4:xixi2</span><br><span class="line">z3&lt;-l4:zhazha3</span><br><span class="line"></span><br><span class="line">newpage A title for the\nlast page</span><br><span class="line"></span><br><span class="line">z3-&gt;l4:xixi2</span><br><span class="line">z3&lt;-l4:zhazha3</span><br></pre></td></tr></table></figure>
+<h4 id="1-9组合消息"><a href="#1-9组合消息" class="headerlink" title="1.9组合消息"></a>1.9组合消息</h4><pre><code>我们可以通过以下关键词将组合消息：
+• alt/else
+• opt
+• loop
+• par
+• break
+• critical
+• group, 后面紧跟着消息内容
+可以在标头 (header) 添加需要显示的文字 (group 除外)。
+关键词 end 用来结束分组。
+注意，分组可以嵌套使用。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Alice -&gt; Bob: Authentication Request</span><br><span class="line">alt successful case</span><br><span class="line">Bob -&gt; Alice: Authentication Accepted</span><br><span class="line">else some kind of failure</span><br><span class="line">Bob -&gt; Alice: Authentication Failure</span><br><span class="line">group My own label</span><br><span class="line">Alice -&gt; Log : Log attack start</span><br><span class="line">loop 1000 times</span><br><span class="line">Alice -&gt; Bob: DNS Attack</span><br><span class="line">end</span><br><span class="line">Alice -&gt; Log : Log attack end</span><br><span class="line">end</span><br><span class="line">else Another type of failure</span><br><span class="line">Bob -&gt; Alice: Please repeat</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h4 id="1-10-给消息添加注释"><a href="#1-10-给消息添加注释" class="headerlink" title="1.10 给消息添加注释"></a>1.10 给消息添加注释</h4><pre><code>我们可以通过在消息后面添加 note left 或者 note right 关键词来给消息添加注释。
+你也可以通过使用 end note 来添加多行注释。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">z3-&gt;l4:x4</span><br><span class="line">note left:打一个招呼</span><br><span class="line">z3&lt;-l4:l3</span><br><span class="line">note right:客套一波 </span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-11-其他注释"><a href="#1-11-其他注释" class="headerlink" title="1.11 其他注释"></a>1.11 其他注释</h4><pre><code>可以使用 note left of，note right of 或 note over 在节点 (participant) 的相对位置放置注释。
+还可以通过修改背景色来高亮显示注释。
+以及使用关键字 end note 来添加多行注释。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">participant z3</span><br><span class="line">participant l4</span><br><span class="line">note left of z3:打一个招呼 </span><br><span class="line">note over of l4:客套一波</span><br></pre></td></tr></table></figure>
+<h4 id="1-14-分隔符"><a href="#1-14-分隔符" class="headerlink" title="1.14 分隔符"></a>1.14 分隔符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">== 第一天==</span><br><span class="line">z3-&gt;l4:x4</span><br><span class="line">note left:打一个招呼</span><br><span class="line">z3&lt;-l4:l3</span><br><span class="line">note right:客套一波</span><br><span class="line"></span><br><span class="line">== 第二天==</span><br><span class="line">z3-&gt;l4:x4</span><br><span class="line">note left:打一个招呼</span><br><span class="line">z3&lt;-l4:l3</span><br><span class="line">note right:客套一波</span><br></pre></td></tr></table></figure>
+<h4 id="1-15引用"><a href="#1-15引用" class="headerlink" title="1.15引用"></a>1.15引用</h4><p>你可以在图中通过使用 ref over 关键词来实现引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">participant Alice</span><br><span class="line">actor Bob</span><br><span class="line">ref over Alice, Bob : init</span><br><span class="line">Alice -&gt; Bob : hello</span><br><span class="line">ref over Bob</span><br><span class="line">This can be on</span><br><span class="line">several lines</span><br><span class="line">end ref</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-16延迟"><a href="#1-16延迟" class="headerlink" title="1.16延迟"></a>1.16延迟</h4><p>你可以使用…来表示延迟，并且还可以给延迟添加注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Alice -&gt; Bob: Authentication Request</span><br><span class="line">...</span><br><span class="line">Bob --&gt; Alice: Authentication Response</span><br><span class="line">...5 minutes latter...</span><br><span class="line">Bob --&gt; Alice: Bye !</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-17空间"><a href="#1-17空间" class="headerlink" title="1.17空间"></a>1.17空间</h4><pre><code>你可以使用 ||| 来增加空间。
+还可以使用数字指定增加的像素的数量。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Alice -&gt; Bob: message 1</span><br><span class="line">Bob --&gt; Alice: ok</span><br><span class="line">|||</span><br><span class="line">Alice -&gt; Bob: message 2</span><br><span class="line">Bob --&gt; Alice: ok</span><br><span class="line">||45||</span><br><span class="line">Alice -&gt; Bob: message 3</span><br><span class="line">Bob --&gt; Alice: ok</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-18生命线的激活与撤销"><a href="#1-18生命线的激活与撤销" class="headerlink" title="1.18生命线的激活与撤销"></a>1.18生命线的激活与撤销</h4><p>关键字 activate 和 deactivate 用来表示参与者的生命活动。<br>一旦参与者被激活，它的生命线就会显示出来。<br>activate 和 deactivate 适用于以上情形。<br>destroy 表示一个参与者的生命线的终结。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">participant User</span><br><span class="line">User-&gt;A:DoWork</span><br><span class="line">activate A</span><br><span class="line">A-&gt;B:&lt;&lt;createRequest&gt;&gt;</span><br><span class="line">activate B</span><br><span class="line">B -&gt; C: DoWork</span><br><span class="line">activate C</span><br><span class="line">C --&gt; B: WorkDone</span><br><span class="line">destroy C</span><br><span class="line">B --&gt; A: RequestCreated</span><br><span class="line">deactivate B</span><br><span class="line">A -&gt; User: Done</span><br><span class="line">deactivate A</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-19创建参与者"><a href="#1-19创建参与者" class="headerlink" title="1.19创建参与者"></a>1.19创建参与者</h4><pre><code>你可以把关键字 create 放在第一次接收到消息之前，以强调本次消息实际上是在创建新的对象。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">z3-&gt;l4:hello</span><br><span class="line">create l4_son</span><br><span class="line">l4 -&gt; l4_son : happy have\n a son</span><br></pre></td></tr></table></figure>
+<h4 id="1-23-包裹参与者"><a href="#1-23-包裹参与者" class="headerlink" title="1.23 包裹参与者"></a>1.23 包裹参与者</h4><pre><code>可以使用 box 和 end box 画一个盒子将参与者包裹起来。
+还可以在 box 关键字之后添加标题或者背景颜色。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">box &quot;zh&quot; #LightBlue</span><br><span class="line">z3-&gt;l4:hello</span><br><span class="line">end box</span><br><span class="line">l4-&gt;Alice</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-24-移除脚注"><a href="#1-24-移除脚注" class="headerlink" title="1.24 移除脚注"></a>1.24 移除脚注</h4><pre><code>使用 hide footbox 关键字移除脚注。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">hide footbox</span><br><span class="line">title Footer removed</span><br><span class="line">Alice -&gt; Bob: Authentication Request</span><br><span class="line">Bob --&gt; Alice: Authentication Response</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-25-外观参数-skinparam"><a href="#1-25-外观参数-skinparam" class="headerlink" title="1.25 外观参数 (skinparam)"></a>1.25 外观参数 (skinparam)</h4><pre><code>使用 skinparam 命令改变颜色和字体。
+如下场景可以使用这一命令：
+• 在图示定义中，
+• 在一个包含文件中,
+• 在由命令行或者 ANT 任务提供的配置文件中。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">skinparam sequenceArrowThickness 2</span><br><span class="line">skinparam roundcorner 20</span><br><span class="line"></span><br><span class="line">skinparam maxmessagesize 60</span><br><span class="line">skinparam sequenceParticipant underline</span><br><span class="line">actor User</span><br><span class="line">participant &quot;First Class&quot; as A</span><br><span class="line">participant &quot;Second Class&quot; as B</span><br><span class="line">participant &quot;Last Class&quot; as C</span><br><span class="line">User -&gt; A: DoWork</span><br><span class="line">activate A</span><br><span class="line">A -&gt; B: Create Request</span><br><span class="line">activate B</span><br><span class="line">B -&gt; C: DoWork</span><br><span class="line">activate C</span><br><span class="line">C --&gt; B: WorkDone</span><br><span class="line">destroy C</span><br><span class="line">B --&gt; A: Request Created</span><br><span class="line">deactivate B</span><br><span class="line">A --&gt; User: Done</span><br><span class="line">deactivate A</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">skinparam backgroundColor #EEEBDC</span><br><span class="line">skinparam handwritten true</span><br><span class="line">skinparam sequence &#123;</span><br><span class="line">ArrowColor DeepSkyBlue</span><br><span class="line">ActorBorderColor DeepSkyBlue</span><br><span class="line">LifeLineBorderColor blue</span><br><span class="line">LifeLineBackgroundColor #A9DCDF</span><br><span class="line">ParticipantBorderColor DeepSkyBlue</span><br><span class="line">ParticipantBackgroundColor DodgerBlue</span><br><span class="line">ParticipantFontName Impact</span><br><span class="line">ParticipantFontSize 17</span><br><span class="line">ParticipantFontColor #A9DCDF</span><br><span class="line">ActorBackgroundColor aqua</span><br><span class="line">ActorFontColor DeepSkyBlue</span><br><span class="line">ActorFontSize 17</span><br><span class="line">ActorFontName Aapex</span><br><span class="line">&#125;</span><br><span class="line">actor User</span><br><span class="line">participant &quot;First Class&quot; as A</span><br><span class="line">participant &quot;Second Class&quot; as B</span><br><span class="line">participant &quot;Last Class&quot; as C</span><br><span class="line">User -&gt; A: DoWork</span><br><span class="line">activate A</span><br><span class="line">A -&gt; B: Create Request</span><br><span class="line">activate B</span><br><span class="line">B -&gt; C: DoWork</span><br><span class="line">activate C</span><br><span class="line">C --&gt; B: WorkDone</span><br><span class="line">destroy C</span><br><span class="line">B --&gt; A: Request Created</span><br><span class="line">deactivate B</span><br><span class="line">A --&gt; User: Done</span><br><span class="line">deactivate A</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="1-26-填充区设置"><a href="#1-26-填充区设置" class="headerlink" title="1.26 填充区设置"></a>1.26 填充区设置</h4><pre><code>可以设定填充区的参数配置。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">skinparam ParticipantPadding 20</span><br><span class="line">skinparam BoxPadding 10</span><br><span class="line">box &quot;Foo1&quot;</span><br><span class="line">participant Alice1</span><br><span class="line">participant Alice2</span><br><span class="line">end box</span><br><span class="line">box &quot;Foo2&quot;</span><br><span class="line">participant Bob1</span><br><span class="line">participant Bob2</span><br><span class="line">end box</span><br><span class="line">Alice1 -&gt; Bob1 : hello</span><br><span class="line">Alice1 -&gt; Out : out</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h3 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h3><h4 id="2-1-用例"><a href="#2-1-用例" class="headerlink" title="2.1 用例"></a>2.1 用例</h4><pre><code>用例用圆括号括起来。
+也可以用关键字 usecase 来定义用例。还可以用关键字 as 定义一个别名，这个别名可以在以后定
+义关系的时候使用。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">(First usecase)</span><br><span class="line">(Another usecase) as (UC2)</span><br><span class="line">usecase UC3</span><br><span class="line">usecase (Last\nusecase) as UC4</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="2-2角色"><a href="#2-2角色" class="headerlink" title="2.2角色"></a>2.2角色</h4><pre><code>角色用两个冒号包裹起来。
+也可以用 actor 关键字来定义角色。还可以用关键字 as 来定义一个别名，这个别名可以在以后定
+义关系的时候使用。
+后面我们会看到角色的定义是可选的。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">:z3:</span><br><span class="line">:李四: as l4</span><br><span class="line">actor w5</span><br><span class="line">actor :赵六: as z6</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="2-3用例描述"><a href="#2-3用例描述" class="headerlink" title="2.3用例描述"></a>2.3用例描述</h4><pre><code>如果想定义跨越多行的用例描述，可以用双引号将其裹起来。
+还可以使用这些分隔符：-- .. == __。并且还可以在分隔符中间放置标题。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">usecase 张三 as &quot;拥有最纯正皇室血统的人</span><br><span class="line">--</span><br><span class="line">宇宙统治者</span><br><span class="line">== </span><br><span class="line">就是强！！！！！！！！！！！！！！！！</span><br><span class="line">&quot;</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="2-4基础示例"><a href="#2-4基础示例" class="headerlink" title="2.4基础示例"></a>2.4基础示例</h4><pre><code>用箭头 --&gt; 连接角色和用例。
+横杠&quot;-&quot; 越多，箭头越长。通过在箭头定义的后面加一个冒号及文字的方式来添加标签。
+在这个例子中，User 并没有定义，而是直接拿来当做一个角色使用。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:z3: -&gt; (吃喝玩乐)</span><br><span class="line">:z3:--&gt;(Use the application):A small label</span><br><span class="line">:l4: ---&gt; (Use the application) : This is\nyet another\nlabel</span><br></pre></td></tr></table></figure>
+<h4 id="2-5继承"><a href="#2-5继承" class="headerlink" title="2.5继承"></a>2.5继承</h4><pre><code>如果一个角色或者用例继承于另一个，那么可以用 &lt;|--符号表示（它表示 ）。
+PlantUML : 语言参考指南 (2018 年 5 月 11 日星期五) 23 of 125
+2.6 使用注释 2 用例图
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@startuml</span><br><span class="line">:Main Admin: as Admin</span><br><span class="line">(Use the application) as (Use)</span><br><span class="line">User &lt;|-- Admin</span><br><span class="line">(Start) &lt;|-- (Use)</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure>
+<h4 id="2-6使用注释"><a href="#2-6使用注释" class="headerlink" title="2.6使用注释"></a>2.6使用注释</h4><pre><code>可以用 note left of , note right of , note top of , note bottom of 等关键字给一个对象添加注释。
+注释还可以通过 note 关键字来定义，然后用.. 连接其他对象。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:张三:as z3</span><br><span class="line">(Use the application) as use</span><br><span class="line">z3-&gt;use</span><br><span class="line">z3-&gt;(start)</span><br><span class="line">note right of z3:最纯正\n皇室血统的男人</span><br></pre></td></tr></table></figure>
 
       
 
@@ -213,16 +271,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/15/shiro/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/16/planUML/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/11/sql_opration/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sql_opration(sql操作)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -242,453 +359,14 @@
 
 
 
-
-  
-    <article id="post-ssm_frame_build" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/26/ssm_frame_build/">SMM框架搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/26/ssm_frame_build/" class="archive-article-date">
-  	<time datetime="2017-12-26T01:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<h3 id="SSM整合："><a href="#SSM整合：" class="headerlink" title="SSM整合："></a>SSM整合：</h3><pre><code>1）Dao层
-    pojo和映射文件以及接口（使用逆向工程生成）
-    ApplicationContext-dao.xml 整合后spring在dao层的配置
-        数据源
-        会话工厂
-        扫描Mapper
-2）service层
-    事务            ApplicationContext-trans.xml
-    @Service扫描    ApplicationContext-service.xml
-3）controller层
-        SpringMvc.xml
-            注解扫描：扫描@Controller注解
-            注解驱动：替我们显示的配置了最新的处理器映射器
-            视图解析器：显示的配置是为了在controller中不用每个方法都写全路径
-4）web.xml
-    SpringMvc前端控制器
-    spring监听器
-</code></pre></blockquote>
-<pre><code>创建包
---------
-    dao包
-    service包
-    controller包
-使用mybatis逆向工程创建对应dao和pojo
-创建配置文件
--------
-    db.properties  --驱动，url，账号，密码。。
-    SqlMapConfig.xml
-        mybatis配置文件
-    ApplicationContext-dao.xml             
-        加载db配置文件&lt;context:property-placeholder location=&quot;db.properties&quot;/&gt;
-        配置连接池
-        配置sqlSessionFactory
-        配置mapper扫描器
-    ApplicationContext-service.xml
-        配置service扫描
-    ApplicationContext-tran.xml
-        配置事务管理器
-        配置事务通知
-        切面配置事务通知
-    SpringMvc.xml
-        Controller注解扫描
-        注解驱动
-        视图解析器
-    web.xml
-        监听器创建spring容器
-        springmvc前端控制器
-</code></pre><h3 id="ssm框架整合"><a href="#ssm框架整合" class="headerlink" title="ssm框架整合"></a>ssm框架整合</h3><pre><code>&gt; #### maven配置jar包
-- log4j     日志文件
-- dbcp      数据连接池
-- jdbc      jdbc连接数据库
-- json      JsonObjection
-- swagger   swaggerAPI
-- mybatis   mybatis
-- mybatis-spring    mybaits-spring整合包
-- javaee-api        http,监听器注解需要引入
-- fileupload        文件上传，form-data数据
-- bcprov-jdk15on    rsa算法支持
-- commons-codec     base64编码
-- jxls     excel模板导出
-- 
-- 
-- 
-- 
-
-&gt; ####框架结构
-D:.
-├─base
-│  └─wang
-│      └─crown
-│          └─base
-│              ├─annotation
-│              │      ModelBind.java
-│              │      ModelColumn.java
-│              │      ModelPk.java
-│              │      ModelUpdatable.java
-│              │
-│              ├─constants  常量包
-│              │      ConstantsBase.java    基础常量
-│              │      ConstantsError.java   错误常量类
-│              │      ConstantsJDBC.java
-│              │
-│              ├─dao
-│              │      BasicDataSourceCustom.java   通过重写setPassword方法对jdbc密码进行加密 (继承BasicDataSource类)
-│              │      DbcpPool.java dbcp数据库连接池 (被JdbcDao类继承)
-│              │      IMybatisDao.java
-│              │      JdbcDao.java  jdbc数据库增删改查 (继承了DbcpPool类)
-│              │      ModelDao.java 单表操作模型类 (继承jdbcDao,被po类所继承)
-│              │      MybatisDao.java
-│              │      MySqlBackup.java      MySQL数据库备份和恢复
-│              │
-│              ├─em
-│              │      EnumFileType.java
-│              │      EnumQueryType.java
-│              │
-│              ├─encrypt   加密包
-│              │      AESEncrypt.java
-│              │      Base64Encrypt.java
-│              │      DESEncrypt.java
-│              │      MD5DES.java      MD5加密解密工具类
-│              │      TripleDESEncrypt.java
-│              │
-│              ├─entity     实体包
-│              │      AdvancedQuery.java
-│              │      BaseModel.java    交互辅助类
-│              │      FileLog.java
-│              │      FileLogCustom.java
-│              │      FileServerParams.java
-│              │      PageInfo.java     页面信息
-│              │      QueryParams.java  查询参数类
-│              │
-│              ├─exception  异常包
-│              │      BusinessException.java    自定义异常类
-│              │      BusinessExceptionResolve.java     全局异常处理器
-│              │
-│              ├─file   文件包
-│              │      ExcelUtil.java            excel导出工具类
-│              │      ProgressBarThread.java    下载进度条显示类
-│              │      UploaderFileUtil.java     文件下载工具类
-│              │
-│              ├─filter
-│              │      CustomObjectMapper.java   SpringMVC防止xss注入，对json数据进行escape处理  (继承ObjectMaper)
-│              │      EncodeFilter.java
-│              │      EncodeFilterUtil.java
-│              │
-│              ├─rsa    rsa算法包
-│              │      GenerateRSAKeyServlet.java
-│              │      GenerateRSAPublicKeyServlet.java
-│              │      GetCookiesIdServlet.java
-│              │      RandUtil.java
-│              │      RSAJS.java
-│              │      RSAWX.java
-│              │
-│              ├─swagger
-│              │      SwaggerConfig.java
-│              │
-│              └─util   工具包
-│                      BaseUtil.java
-│                      ChangeType.java
-│                      ChineseConvert.java
-│                      ChineseData.java
-│                      ConfigPath.java
-│                      HttpUtils.java
-│                      LoadFileServerProperties.java
-│                      QueryUtil.java   查询工具类
-│                      RegularExpressionCheck.java
-│                      ValidationUtil.java
-│
-├─bb
-│  ├─mapper
-│  │      DcSysUserMapper.xml
-│  │
-│  └─org
-│      └─zsc
-│          ├─controller
-│          │      DcSysUserController.java
-│          │
-│          ├─dao
-│          │      DcSysUserDao.java
-│          │
-│          ├─po
-│          │      DcSysUser.java
-│          │
-│          └─service
-│              │  DcSysUserService.java
-│              │
-│              └─impl
-│                      DcSysUserServiceImpl.java
-│
-├─common
-│  └─org
-│      └─zsc
-│          └─common
-│              ├─aop
-│              │      AopLog.java
-│              │      OperationAspect.java
-│              │
-│              ├─config
-│              │      Config.java
-│              │
-│              ├─constants
-│              │      ConstantsCommon.java
-│              │      ConstantsParameterType.java
-│              │      ConstantsSysParams.java
-│              │
-│              ├─controller     基础controller
-│              │      BaseController.java     基础controller类,大部分controller继承此类  
-│              │      RsaController.java
-│              │      SysLog4jController.java
-│              │      SysParamsController.java
-│              │      UploaderController.java
-│              │
-│              ├─em
-│              │      EnumModelFile.java
-│              │      EnumNumInfo.java
-│              │      EnumOperationModule.java
-│              │
-│              ├─filter
-│              │      LoginFilter.java
-│              │
-│              ├─listener 监视器
-│              │      WebappListener.java   监视器，获得webapp根目录
-│              │
-│              ├─pojo
-│              │      SysParams.java
-│              │
-│              ├─service
-│              │  │  SysFileLogService.java
-│              │  │  SysParamsService.java
-│              │  │
-│              │  └─impl
-│              │          SysFileLogServiceImpl.java
-│              │          SysParamsServiceImpl.java
-│              │
-│              └─util
-│                      DateUtils.java
-│                      ReadXml.java
-│                      ReadXmlDom4j.java
-│
-├─resources
-│      fileServer.properties
-│      jdbc.properties
-│      log4j.properties
-│      menuConfig.xml
-│      mybatis-config.xml
-│      redis.properties
-│      redis.xml
-│      spring-mvc.xml
-│      spring-mybatis.xml
-│      sysParams.xml
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/26/ssm_frame_build/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-intellij_create_web_project" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/25/intellij_create_web_project/">Intellij IDEA 创建web项目</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/25/intellij_create_web_project/" class="archive-article-date">
-  	<time datetime="2017-12-25T05:51:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用Intellij-IDEA创建web项目"><a href="#使用Intellij-IDEA创建web项目" class="headerlink" title="使用Intellij IDEA创建web项目"></a>使用Intellij IDEA创建web项目</h1><h3 id="首先新建一个项目。选择File–-gt-new–-gt-project"><a href="#首先新建一个项目。选择File–-gt-new–-gt-project" class="headerlink" title="首先新建一个项目。选择File–&gt;new–&gt;project"></a>首先新建一个项目。选择File–&gt;new–&gt;project</h3><p><img src="创建project.png" alt="创建project.png"></p>
-<h3 id="选择一直next直到填写项目（这里用的firstblood）然后选择finish完成普通项目创建"><a href="#选择一直next直到填写项目（这里用的firstblood）然后选择finish完成普通项目创建" class="headerlink" title="选择一直next直到填写项目（这里用的firstblood）然后选择finish完成普通项目创建"></a>选择一直next直到填写项目（这里用的firstblood）然后选择finish完成普通项目创建</h3><p><img src="创建project2.png" alt="创建project2.png"><br><img src="创建项目命名.png" alt="创建项目命名.png"></p>
-<h3 id="创建完成的项目目录如下："><a href="#创建完成的项目目录如下：" class="headerlink" title="创建完成的项目目录如下："></a>创建完成的项目目录如下：</h3><p><img src="创建完的项目目录.png" alt="创建完的项目目录.png"></p>
-<h3 id="右键项目选择New–-gt-Module-选择Web-Application然后Next起一个模块名称（这里用的是boom）选择Finish完成"><a href="#右键项目选择New–-gt-Module-选择Web-Application然后Next起一个模块名称（这里用的是boom）选择Finish完成" class="headerlink" title="右键项目选择New–&gt;Module,选择Web Application然后Next起一个模块名称（这里用的是boom）选择Finish完成"></a>右键项目选择New–&gt;Module,选择Web Application然后Next起一个模块名称（这里用的是boom）选择Finish完成</h3><p><img src="创建module.png" alt="创建module"><br><img src="创建模块.png" alt="创建模块"><br><img src="命名模块名称.png" alt="命名模块名称"></p>
-<h3 id="模块创建"><a href="#模块创建" class="headerlink" title="模块创建"></a>模块创建</h3><p>创建成功的模块目录如下,再在WEB-INF下面创建两个文件夹lib和classes<br><img src="模块目录.png" alt="模块目录"><br><img src="创建完lib和classes.png" alt="创建完lib和classes.png"><br>更改claess目录为模块编译输出路径，点击File选择Project Structure。选择Modules–&gt;Paths–&gt;Use module compile output path 使用classes目录。<br><img src="打开project structure.png" alt="打开project structure.png"><br><img src="选择模块输出目录.png" alt="选择模块输出目录.png"><br>选择lib目录为jar包路径，同样在Modules里面，选择Modules–&gt;Dependencies点击+号选择JAR or directories，选择lib目录<br><img src="选择jar包路径.png" alt="选择jar包路径.png"></p>
-<h3 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h3><p>点击Run选择Edit Configurations,点击+号选择Tomcat Server点Local,命名运行名（这里是tom）点击Configure<br><img src="配置tomcat.png" alt="配置tomcat.png"><br><img src="添加tomcat.png" alt="添加tomcat.png"><br><img src="命名tomcat.png" alt="命名tomcat.png"></p>
-<p>给tomcat服务器命名（这里叫2tomcat）配置TomcatHome选择Tomcat解压出来的路径 如果没有点击这里可以下载<a href="apache-tomcat-7.0.8.zip">apache-tomcat-7.0.8.zip</a><br>选择Deployment点击+号选择Artifact<br><img src="给tomca命名.png" alt="给tomca命名.png"><br><img src="tomcat部署项目.png" alt="tomcat部署项目.png"><br>点击右上角的三角形按钮，运行tomcat，<br><img src="tomcat运行项目.png" alt="tomcat运行项目.png"><br>运行图<br><img src="jsp页面.png" alt="jsp页面.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/25/intellij_create_web_project/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-word" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/20/word/">word快捷键</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/20/word/" class="archive-article-date">
-  	<time datetime="2017-12-20T05:51:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="NumberingGallery-创建编号列表-ctrl-m-（序号排序列表）"><a href="#NumberingGallery-创建编号列表-ctrl-m-（序号排序列表）" class="headerlink" title="NumberingGallery     创建编号列表            ctrl + m        （序号排序列表）"></a>NumberingGallery     创建编号列表            ctrl + m        （序号排序列表）</h3><h3 id="BulletsGallery-打开项目符号库-ctrl-shift-m-（符号排序列表）"><a href="#BulletsGallery-打开项目符号库-ctrl-shift-m-（符号排序列表）" class="headerlink" title="BulletsGallery         打开项目符号库            ctrl + shift + m （符号排序列表）"></a>BulletsGallery         打开项目符号库            ctrl + shift + m （符号排序列表）</h3><h3 id="ClearAllFormatting-清除所选文件格式和样式-Alt-Ctl-Shift-X"><a href="#ClearAllFormatting-清除所选文件格式和样式-Alt-Ctl-Shift-X" class="headerlink" title="ClearAllFormatting     清除所选文件格式和样式    Alt + Ctl + Shift + X"></a>ClearAllFormatting     清除所选文件格式和样式    Alt + Ctl + Shift + X</h3><h3 id="LeftPara-指定左缩进对齐段落-Ctrl-Alt-L"><a href="#LeftPara-指定左缩进对齐段落-Ctrl-Alt-L" class="headerlink" title="LeftPara            指定左缩进对齐段落        Ctrl + Alt + L"></a>LeftPara            指定左缩进对齐段落        Ctrl + Alt + L</h3><h3 id="RightPara-指定右缩进对齐段落-Ctrl-Alt-R"><a href="#RightPara-指定右缩进对齐段落-Ctrl-Alt-R" class="headerlink" title="RightPara            指定右缩进对齐段落        Ctrl + Alt + R"></a>RightPara            指定右缩进对齐段落        Ctrl + Alt + R</h3><h3 id="InsertAnnoation-添加批注-k-Ctrl-Alt-M"><a href="#InsertAnnoation-添加批注-k-Ctrl-Alt-M" class="headerlink" title="InsertAnnoation        添加批注            k    Ctrl + Alt + M"></a>InsertAnnoation        添加批注            k    Ctrl + Alt + M</h3><h3 id="FormatParagraph-修改行距-Alt-Z"><a href="#FormatParagraph-修改行距-Alt-Z" class="headerlink" title="FormatParagraph     修改行距                   Alt + Z"></a>FormatParagraph     修改行距                   Alt + Z</h3><p>Sub setHotkeyHJKL()<br>‘<br>‘ setHotkeyHJKL 宏<br>‘ 设置上下左右快捷键<br>‘<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyH, wdKeyControl), KeyCategory:= _<br>        wdKeyCategoryCommand, Command:=”CharLeft”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyH, wdKeyControl, wdKeyShift), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”CharLeftExtend”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, wdKeyControl), KeyCategory:= _<br>        wdKeyCategoryCommand, Command:=”CharRight”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, wdKeyControl, wdKeyShift), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”CharRightExtend”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, wdKeyControl), KeyCategory:= _<br>        wdKeyCategoryCommand, Command:=”LineDown”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, wdKeyControl, wdKeyShift), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”LineDownExtend”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyK, wdKeyControl), KeyCategory:= _<br>        wdKeyCategoryCommand, Command:=”LineUp”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyK, wdKeyControl, wdKeyShift), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”LineUpExtend”<br>End Sub<br>Sub setHotKeyLRalign()<br>‘<br>‘ setHotKeyLRalign 宏<br>‘ 左右对齐快捷键  左对齐  Ctrl + Alt + L   右对齐   Ctrl + Alt + R<br>‘<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, wdKeyControl, wdKeyAlt), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”LeftPara”<br>    CustomizationContext = NormalTemplate<br>    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyR, wdKeyControl, wdKeyAlt), _<br>        KeyCategory:=wdKeyCategoryCommand, Command:=”RightPara”<br>End Sub<br>Sub 转换成pdf()<br>‘<br>‘ 转换成pdf 宏<br>‘<br>‘<br>    ActiveDocument.ExportAsFixedFormat OutputFileName:= _<br>        “C:\Users\crown\Desktop\A2-王冠\大学城pdf版\软件技术3153-王冠-成果报告书.pdf”, _<br>        ExportFormat:=wdExportFormatPDF, OpenAfterExport:=False, OptimizeFor:= _<br>        wdExportOptimizeForPrint, Range:=wdExportAllDocument, From:=1, To:=1, _<br>        Item:=wdExportDocumentContent, IncludeDocProps:=True, KeepIRM:=True, _<br>        CreateBookmarks:=wdExportCreateNoBookmarks, DocStructureTags:=True, _<br>        BitmapMissingFonts:=True, UseISO19005_1:=False<br>    ChangeFileOpenDirectory “C:\Users\crown\Desktop\A2-王冠\大学城pdf版\”<br>End Sub<br>run</p>
-<p>VBA</p>
-<h2 id="Visio"><a href="#Visio" class="headerlink" title="Visio"></a>Visio</h2><h3 id="修改连接线默认格式-文件—-gt-页面设置—-gt-布局与排列，找到“样式”下拉框选中“直线”即可"><a href="#修改连接线默认格式-文件—-gt-页面设置—-gt-布局与排列，找到“样式”下拉框选中“直线”即可" class="headerlink" title="修改连接线默认格式 文件—&gt;页面设置—&gt;布局与排列，找到“样式”下拉框选中“直线”即可"></a>修改连接线默认格式 文件—&gt;页面设置—&gt;布局与排列，找到“样式”下拉框选中“直线”即可</h3><p>已发货，以下是您的链接： </p>
-<p>Myeclipse2014－2016正式版<br>链接: <a href="https://pan.baidu.com/s/1sll06q5" target="_blank" rel="noopener">https://pan.baidu.com/s/1sll06q5</a> </p>
-<p>密码: m57t </p>
-<p>Myeclipse2017<br>链接: <a href="https://pan.baidu.com/s/1i45d9g5" target="_blank" rel="noopener">https://pan.baidu.com/s/1i45d9g5</a> </p>
-<p>密码: cyfb </p>
-<p>赠送：JAVA珍藏视频教程和电子书籍<br>链接: <a href="https://pan.baidu.com/s/1mhZz8uO" target="_blank" rel="noopener">https://pan.baidu.com/s/1mhZz8uO</a> </p>
-<p>密码: m1jm </p>
-<p>！！！！！注意：文件太多，分几次转存。链接打不开请多刷新几次！！！！！ </p>
-<p>破解前需要安装好jdk 感谢您的购买，满意请给我们好评噢！ </p>
-<p>链接不定时失效请先保存在自己网盘，然后登陆下载喔。</p>
-<p>C:\Program Files (x86)\Java\jdk1.8.0_25</p>
-<p>F:\python\python1\Scripts\;F:\python\python1\;C:\Program Files\Java\jdk1.7.0_17\bin;C:\Users\crown\AppData\Roaming\npm;C:\Program Files\nodejs\New Folder;C:\Users\crown\AppData\Local\atom\bin;C:\Users\crown\AppData\Local\GitHubDesktop\bin</p>
-<p>This product did not pass the MyEclipse integrity check.</p>
-<p>The sinature chain used to sign MyEclipse is either not valid or does not belong to Genuitec</p>
-<p>Java was started but returned exit code =-805306369</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/20/word/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -711,8 +389,8 @@ D:.
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

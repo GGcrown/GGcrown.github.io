@@ -144,6 +144,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-docker" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/11/docker/">docker</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/11/docker/" class="archive-article-date">
+  	<time datetime="2018-12-11T09:24:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="docker的安装参考"><a href="#docker的安装参考" class="headerlink" title="docker的安装参考"></a>docker的安装<a href="http://blog.51cto.com/11887934/2050590" target="_blank" rel="noopener">参考</a></h3><h4 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h4><p>yum install -y yum-utils device-mapper-persistent-data lvm2</p>
+<h4 id="添加Docker软件包源"><a href="#添加Docker软件包源" class="headerlink" title="添加Docker软件包源"></a>添加Docker软件包源</h4><p>yum-config-manager –add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a></p>
+<h4 id="关闭测试版本list（只显示稳定版）"><a href="#关闭测试版本list（只显示稳定版）" class="headerlink" title="关闭测试版本list（只显示稳定版）"></a>关闭测试版本list（只显示稳定版）</h4><p>sudo yum-config-manager –enable docker-ce-edge<br>sudo yum-config-manager –enable docker-ce-test</p>
+<h4 id="更新yum包索引"><a href="#更新yum包索引" class="headerlink" title="更新yum包索引"></a>更新yum包索引</h4><p>yum makecache fast</p>
+<h4 id="NO-1-直接安装Docker-CE-（will-always-install-the-highest-possible-version，可能不符合你的需求）"><a href="#NO-1-直接安装Docker-CE-（will-always-install-the-highest-possible-version，可能不符合你的需求）" class="headerlink" title="NO.1 直接安装Docker CE （will always install the highest  possible version，可能不符合你的需求）"></a>NO.1 直接安装Docker CE （will always install the highest  possible version，可能不符合你的需求）</h4><p>yum install docker-ce</p>
+<h4 id="NO-2-指定版本安装"><a href="#NO-2-指定版本安装" class="headerlink" title="NO.2 指定版本安装"></a>NO.2 指定版本安装</h4><p>yum list docker-ce –showduplicates|sort -r<br>yum install docker-ce-17.09.0.ce -y</p>
+<h3 id="docker-web项目运行参考"><a href="#docker-web项目运行参考" class="headerlink" title="docker web项目运行参考"></a>docker web项目运行<a href="https://blog.csdn.net/qq_32351227/article/details/78673591" target="_blank" rel="noopener">参考</a></h3><p>特别注意(docker cp NginxDemo.war 3cb492a27475没有空格:/usr/local/tomcat/webapps)<br><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看tomcat容器挂载路径</span></span><br><span class="line">docker exec -it containerID /bin/bash</span><br></pre></td></tr></table></figure></p>
+<h3 id="mysql-参考"><a href="#mysql-参考" class="headerlink" title="mysql 参考"></a>mysql <a href="https://www.cnblogs.com/heyangyi/p/9288402.html" target="_blank" rel="noopener">参考</a></h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装mysql 镜像</span></span><br><span class="line">docker pull mysql:<span class="number">5.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建mysql实例</span></span><br><span class="line">docker <span class="keyword">run</span>  --name mymysql -e MYSQL_ROOT_PASSWORD=123 -d -p 3306:3306 containerID</span><br><span class="line"></span><br><span class="line"># 进入实例修改mysql配置信息</span><br><span class="line">docker exec -it containerID bash</span><br></pre></td></tr></table></figure>
+<h3 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行</span></span><br><span class="line">docker start containerID</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">docker stop containerID</span><br><span class="line"><span class="comment"># 重新运行</span></span><br><span class="line">docker restart containerID</span><br><span class="line"><span class="comment"># 系统文件和容器内文件进行拷贝</span></span><br><span class="line">docker cp 文件名 containerID:/container_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># ﻿从主机复制到容器</span></span><br><span class="line">docker cp host_path containerID:container_path</span><br><span class="line"><span class="comment"># 从容器复制到主机</span></span><br><span class="line">docker cp containerID:container_path host_path</span><br></pre></td></tr></table></figure>
+<h3 id="docker-练习"><a href="#docker-练习" class="headerlink" title="docker 练习"></a>docker 练习</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">docker version <span class="comment">#docker版本</span></span><br><span class="line">docker search tutorial <span class="comment">#查找tutorial的镜像</span></span><br><span class="line">docker pull learn/tutorial <span class="comment">#下载镜像</span></span><br><span class="line">docker <span class="keyword">run</span> learn/tutorial echo 'hello world' #实例化镜像成容器并执行hello world</span><br><span class="line">docker run learn/tutorial apt-get install -y ping #给容器中安装ping命令</span><br><span class="line">docker commit bb4c0c2d7616 learn/ping #提交修改后的实例为新的镜像，名称为learn/ping</span><br><span class="line">docker run learn/ping ping www.baidu.com #实例化新提交的容器并执行ping命令</span><br><span class="line">docker inspect 855c09a59ce0 #查看运行中的容器</span><br><span class="line">docker push learn/ping #把镜像保存到仓库中</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d #—d:守护式进程</span><br><span class="line">docker ps -a -l # -a:所有容器   -l:最新创建的容器</span><br><span class="line">docker run --name=mytomcat  #--name:自定义容器名字</span><br><span class="line">docker rm IMAGE #删除容器</span><br><span class="line">docker attach IMAGE #进入容器</span><br><span class="line">docker logds IMAGE -t -f --tail 10 #显示日志 -t:附加时间 -f:实时更新 --tail:显示最后多少条</span><br><span class="line">docker top IMAGE #容器中进程情况</span><br><span class="line">docker stop IMAGE #停止容器</span><br><span class="line">docker kil IMAGE #关闭容器(直接关闭线程)</span><br><span class="line">docker port IAMGE #容器端口映射情况</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/11/docker/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-redis" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -1217,83 +1289,6 @@ show status like &apos;innodb_row_lock%&apos;;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/06/27/autoHotKey/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-designPattern" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/designPattern/">设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/25/designPattern/" class="archive-article-date">
-  	<time datetime="2018-05-25T02:27:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h4><h5 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h5><ul>
-<li>首先将构造函数私有划 使得不能在外部调用构造函数</li>
-<li>创建自己的静态变量</li>
-<li>将对象初始化放在方法内，判断静态变量是否初始化，已经初始化直接返回，没有初始化先初始化再返回</li>
-<li>优点：节省性能，在没有调用的时候不用消耗内存</li>
-<li>缺点：线程不安全，因为静态变量可能在同时被多个线程访问，使得初始化的时候可能造成线程不安全（所以可以加线程锁来解决线程安全的问题）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleSchool</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleSchool singleSchool=<span class="keyword">null</span>;</span><br><span class="line">            </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleSchool</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">            singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 加上线程锁 使得线程更加安全，但是这是因为每次调用方法的时候会有因为线程锁的原因导致运行效率降低</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(SingleSchool.class)&#123;</span><br><span class="line">            <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">                singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 双重线程锁 这样就可以提高运行的效率，因为绝大部门线程不会进入线程锁里面，所以效率提高了</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole3</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(SingleSchool.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(singleSchool==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleSchool</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="饿汉式-1"><a href="#饿汉式-1" class="headerlink" title="饿汉式"></a>饿汉式</h5><ul>
-<li>首先将构造函数私有划 使得不能在外部调用构造函数</li>
-<li>创建自己的静态变量并且直接初始化</li>
-<li>将对象初始化放在方法内，返回静态变量</li>
-<li>优点：在加载的时候就已经初始化，天生线程安全</li>
-<li>缺点：也是因为加载的时候就已经初始化，所以比较消耗资源</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleSchool</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleSchool</span><span class="params">()</span></span>&#123;&#125;<span class="comment">// 私有化构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleSchool singleSchool=<span class="keyword">new</span> SingleSchool();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleSchool <span class="title">getSingleSchoole</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> singleSchool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/25/designPattern/">展开全文 >></a>
         </p>
       
 
